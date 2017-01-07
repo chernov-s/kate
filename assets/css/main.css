@@ -1,0 +1,14 @@
+.content {
+    margin-top: 70px;
+}
+.container {
+    max-width: 900px;
+}
+.tab-pane {
+    background: #fff;
+    padding: 10px;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    line-height: 30px;
+}

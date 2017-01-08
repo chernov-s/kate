@@ -5,17 +5,7 @@
 ?>
 <div class="filter">
 
-    <!-- SEARCH -->
-    <div class="well">
-        <div class="input-group">
-            <input class="form-control" type="text" placeholder="Поиск в разделе: <?=$this->title?>">
-            <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
-            </span>
-        </div>
-    </div>
+    <?=$this->render('_search') ?>
     <!-- FILTER -->
     <div class="well">
 
@@ -55,7 +45,7 @@
                 <div role="tabpanel" class="tab-pane active" id="ads">
                     <div class="row">
                         <div class='col-sm-12'>
-                            <h4>Добавить объявление:</h4>
+                            <h4>Добавить объявление в раздел "<?=$this->title?>"</h4>
                             <form action="?r=category/view" class="form-inline" method="post">
                                 <input type="hidden" name="category_id" value="<?=$id?>">
                                 <div class="form-group">
@@ -74,7 +64,35 @@
                 </div>
                 <!-- /NEW ADS -->
             <?php endif; ?>
-            <div role="tabpanel" class="tab-pane" id="price">...</div>
+            <div role="tabpanel" class="tab-pane" id="price">
+                <!-- PRICE CONTENT -->
+                <div class="row">
+                    <div class='col-sm-12'>
+                        <form action="index.php" class="form-inline" method="get">
+                            <input type="hidden" name="id" value="<?=$id?>">
+                            <input type="hidden" name="r" value="category/index">
+                            <div class="form-group">
+                                <input class="form-control"
+                                       type="text"
+                                       placeholder="от"
+                                       name="price_min"
+                                       value="<?=isset($_GET['price_min']) ? $_GET['price_min'] : ''?>"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control"
+                                       type="text"
+                                       placeholder="до"
+                                       name="price_max"
+                                       value="<?=isset($_GET['price_max']) ? $_GET['price_max'] : ''?>"
+                                >
+                            </div>
+                            <button type="submit" class="btn btn-default">Применить фильтр</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /PRICE CONTENT -->
+            </div>
             <div role="tabpanel" class="tab-pane" id="options">
 
                 <!-- NEW CATEGORY -->

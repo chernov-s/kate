@@ -37,11 +37,32 @@ class CategoryController extends Controller
             $ads = [];
         }
 
+        if(isset($_GET['price_min']) && isset($_GET['price_max'])) {
+            $ads = $this->filterPrice($ads, $_GET['price_min'], $_GET['price_max']);
+        }
         return $this->render('index', [
             'name' => $name,
             'isEndBranch' => $isEndBranch,
             'category' => $category,
             'ads' => $ads,
+        ]);
+    }
+
+    public function filterPrice($ads, $min, $max) {
+        $list = [];
+        foreach ($ads as $item) {
+            if($item->price <= $max && $item->price >= $min)
+                $list[] = $item;
+        }
+        return $list;
+    }
+
+    public function actionSearch() {
+        $q = isset($_GET['q']) ? $_GET['q'] : "";
+        $ads = Ads::getSeatch($q);
+        return $this->render('search', [
+            'ads' => $ads,
+            'q' => $q
         ]);
     }
 

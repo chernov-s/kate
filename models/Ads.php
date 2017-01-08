@@ -47,6 +47,17 @@ class Ads extends Model
         return $list;
     }
 
+    public static function getSeatch($q) {
+        $db = self::getInstance();
+        $stmt = $db->prepare("SELECT a.*, c.name AS category_name, c.parent_id, c.id AS cid, c.end_branch
+                                FROM ads AS a 
+                                LEFT JOIN category AS c
+                                ON a.category_id=c.id
+                            WHERE a.name LIKE :q OR a.description LIKE :q OR c.name LIKE :q");
+        $stmt->execute(['q' => '%'.$q.'%']);
+        return self::getObject($stmt->fetchAll());
+    }
+
     public static function findChild($category_id) {
         $db = self::getInstance();
         $stmt = $db->prepare("SELECT a.*, c.name AS category_name, c.parent_id, c.id AS cid, c.end_branch

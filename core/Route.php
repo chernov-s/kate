@@ -62,6 +62,7 @@ class Route
         $controller->id = $controllerId;
         $content = $controller->{ $action }();
         $title = $controller->title;
+        $breadcrumbs = [];
         include_once ("./views/layouts/$controller->layout.php");
     }
 

@@ -14,12 +14,14 @@ use app\models\Category;
         </div>
     </div>
     <div class="well">
-        <h4>Каталог</h4>
+        <h4>Объявления</h4>
+        <ul class="navbar nav">
         <?php
             $category = Category::findChild(0);
             foreach ($category as $item) {
                 echo "<li><a href='index.php?r=category&id=$item->id'>$item->name</a></li>";
             }
         ?>
+        </ul>
     </div>
 </div>

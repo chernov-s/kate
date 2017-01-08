@@ -7,9 +7,7 @@ use Exception;
 class Controller
 {
     public $id;
-
     public $layout;
-
     public $title;
 
     function __construct()

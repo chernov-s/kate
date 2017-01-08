@@ -1,7 +1,11 @@
 <?php
 /** @var string $content */
 /** @var string $title */
+use app\models\Category;
 
+$id = isset($_GET['id']) ? $_GET['id'] : 0;
+
+$breadcrumbs = array_reverse(Category::findAllParent($id));
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,16 +18,31 @@
 <!-- Page Content -->
 <div class="content">
     <div class="container">
-        <h1><?=$title?></h1>
-        <div class="row">
-            <!-- Filter Column -->
-            <div class="col-md-12">
-                <?php include_once ("_filter.php");?>
-            </div>
-        </div>
+        <ol class="breadcrumb">
+            <li><a href="/">Главная</a></li>
+            <?php
+            if(count($breadcrumbs) > 1) {
+                foreach ($breadcrumbs as $item) {
+                    if($item->name == $title)
+                        break;
+                    echo "<li><a href='index.php?r=category&id=$item->id'>$item->name</a></li>";
+                }
+            }
+            ?>
+            <li class="active"><?php
+                if(strlen($title) > 55) {
+                    echo substr($title, 0, 55) . "...";
+                } else {
+                    echo $title;
+                }
+
+                ?>
+            </li>
+        </ol>
+
         <div class="row">
             <!-- Content Column -->
-            <div class="col-md-12">
+            <div class="col-md-12 category">
                 <?=$content?>
             </div>
         </div>

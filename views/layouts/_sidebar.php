@@ -1,6 +1,7 @@
 <?php
 use app\models\Category;
 ?>
+
 <div class="sidebar">
     <div class="well">
         <h4>Поиск</h4>
